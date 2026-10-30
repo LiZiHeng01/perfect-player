@@ -1,0 +1,551 @@
+{
+  "_meta": {
+    "version": 2,
+    "season": 2026,
+    "source": "ESPN NBA draft API",
+    "sourceUrl": "https://site.web.api.espn.com/apis/site/v2/sports/basketball/nba/draft?season=2026",
+    "fetchedAt": "2026-10-30T08:04:33.160Z"
+  },
+  "picks": [
+    {
+      "pick": 1,
+      "round": 1,
+      "roundPick": 1,
+      "name": "AJ Dybantsa",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "110904"
+    },
+    {
+      "pick": 2,
+      "round": 1,
+      "roundPick": 2,
+      "name": "Darryn Peterson",
+      "pos": "",
+      "height": "6'6\"",
+      "espnId": "110903"
+    },
+    {
+      "pick": 3,
+      "round": 1,
+      "roundPick": 3,
+      "name": "Cameron Boozer",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "110905"
+    },
+    {
+      "pick": 4,
+      "round": 1,
+      "roundPick": 4,
+      "name": "Caleb Wilson",
+      "pos": "",
+      "height": "6'10\"",
+      "espnId": "110906"
+    },
+    {
+      "pick": 5,
+      "round": 1,
+      "roundPick": 5,
+      "name": "Keaton Wagler",
+      "pos": "",
+      "height": "6'6\"",
+      "espnId": "110908"
+    },
+    {
+      "pick": 6,
+      "round": 1,
+      "roundPick": 6,
+      "name": "Mikel Brown Jr.",
+      "pos": "",
+      "height": "6'5\"",
+      "espnId": "110911"
+    },
+    {
+      "pick": 7,
+      "round": 1,
+      "roundPick": 7,
+      "name": "Darius Acuff Jr.",
+      "pos": "",
+      "height": "6'3\"",
+      "espnId": "110910"
+    },
+    {
+      "pick": 8,
+      "round": 1,
+      "roundPick": 8,
+      "name": "Kingston Flemings",
+      "pos": "",
+      "height": "6'4\"",
+      "espnId": "110907"
+    },
+    {
+      "pick": 9,
+      "round": 1,
+      "roundPick": 9,
+      "name": "Morez Johnson Jr.",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "110943"
+    },
+    {
+      "pick": 10,
+      "round": 1,
+      "roundPick": 10,
+      "name": "Brayden Burries",
+      "pos": "",
+      "height": "6'4\"",
+      "espnId": "110919"
+    },
+    {
+      "pick": 11,
+      "round": 1,
+      "roundPick": 11,
+      "name": "Yaxel Lendeborg",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "110914"
+    },
+    {
+      "pick": 12,
+      "round": 1,
+      "roundPick": 12,
+      "name": "Aday Mara",
+      "pos": "",
+      "height": "7'3\"",
+      "espnId": "110934"
+    },
+    {
+      "pick": 13,
+      "round": 1,
+      "roundPick": 13,
+      "name": "Nate Ament",
+      "pos": "",
+      "height": "6'10\"",
+      "espnId": "110909"
+    },
+    {
+      "pick": 14,
+      "round": 1,
+      "roundPick": 14,
+      "name": "Hannes Steinbach",
+      "pos": "",
+      "height": "6'11\"",
+      "espnId": "110915"
+    },
+    {
+      "pick": 15,
+      "round": 1,
+      "roundPick": 15,
+      "name": "Dailyn Swain",
+      "pos": "",
+      "height": "6'8\"",
+      "espnId": "110931"
+    },
+    {
+      "pick": 16,
+      "round": 1,
+      "roundPick": 16,
+      "name": "Bennett Stirtz",
+      "pos": "",
+      "height": "6'4\"",
+      "espnId": "110924"
+    },
+    {
+      "pick": 17,
+      "round": 1,
+      "roundPick": 17,
+      "name": "Ebuka Okorie",
+      "pos": "",
+      "height": "6'2\"",
+      "espnId": "110947"
+    },
+    {
+      "pick": 18,
+      "round": 1,
+      "roundPick": 18,
+      "name": "Christian Anderson Jr.",
+      "pos": "",
+      "height": "6'3\"",
+      "espnId": "110921"
+    },
+    {
+      "pick": 19,
+      "round": 1,
+      "roundPick": 19,
+      "name": "Allen Graves",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "4582714"
+    },
+    {
+      "pick": 20,
+      "round": 1,
+      "roundPick": 20,
+      "name": "Jayden Quaintance",
+      "pos": "",
+      "height": "6'10\"",
+      "espnId": "110920"
+    },
+    {
+      "pick": 21,
+      "round": 1,
+      "roundPick": 21,
+      "name": "Karim Lopez",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "110912"
+    },
+    {
+      "pick": 22,
+      "round": 1,
+      "roundPick": 22,
+      "name": "Labaron Philon Jr.",
+      "pos": "",
+      "height": "6'4\"",
+      "espnId": "110923"
+    },
+    {
+      "pick": 23,
+      "round": 1,
+      "roundPick": 23,
+      "name": "Zuby Ejiofor",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "110938"
+    },
+    {
+      "pick": 24,
+      "round": 1,
+      "roundPick": 24,
+      "name": "Cameron Carr",
+      "pos": "",
+      "height": "6'5\"",
+      "espnId": "110925"
+    },
+    {
+      "pick": 25,
+      "round": 1,
+      "roundPick": 25,
+      "name": "Sergio De Larrea",
+      "pos": "",
+      "height": "6'5\"",
+      "espnId": "111782"
+    },
+    {
+      "pick": 26,
+      "round": 1,
+      "roundPick": 26,
+      "name": "Tarris Reed Jr.",
+      "pos": "",
+      "height": "6'11\"",
+      "espnId": "110965"
+    },
+    {
+      "pick": 27,
+      "round": 1,
+      "roundPick": 27,
+      "name": "Chris Cenac Jr.",
+      "pos": "",
+      "height": "6'11\"",
+      "espnId": "110917"
+    },
+    {
+      "pick": 28,
+      "round": 1,
+      "roundPick": 28,
+      "name": "Joshua Jefferson",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "110933"
+    },
+    {
+      "pick": 29,
+      "round": 1,
+      "roundPick": 29,
+      "name": "Alex Karaban",
+      "pos": "",
+      "height": "6'8\"",
+      "espnId": "110932"
+    },
+    {
+      "pick": 30,
+      "round": 1,
+      "roundPick": 30,
+      "name": "Koa Peat",
+      "pos": "",
+      "height": "6'8\"",
+      "espnId": "110918"
+    },
+    {
+      "pick": 31,
+      "round": 2,
+      "roundPick": 1,
+      "name": "Bruce Thornton",
+      "pos": "",
+      "height": "6'2\"",
+      "espnId": "110984"
+    },
+    {
+      "pick": 32,
+      "round": 2,
+      "roundPick": 2,
+      "name": "Richie Saunders",
+      "pos": "",
+      "height": "6'5\"",
+      "espnId": "110942"
+    },
+    {
+      "pick": 33,
+      "round": 2,
+      "roundPick": 3,
+      "name": "Isaiah Evans",
+      "pos": "",
+      "height": "6'6\"",
+      "espnId": "110927"
+    },
+    {
+      "pick": 34,
+      "round": 2,
+      "roundPick": 4,
+      "name": "Meleek Thomas",
+      "pos": "",
+      "height": "6'5\"",
+      "espnId": "110937"
+    },
+    {
+      "pick": 35,
+      "round": 2,
+      "roundPick": 5,
+      "name": "Trevon Brazile",
+      "pos": "",
+      "height": "6'10\"",
+      "espnId": "110983"
+    },
+    {
+      "pick": 36,
+      "round": 2,
+      "roundPick": 6,
+      "name": "Baba Miller",
+      "pos": "",
+      "height": "6'11\"",
+      "espnId": "110966"
+    },
+    {
+      "pick": 37,
+      "round": 2,
+      "roundPick": 7,
+      "name": "Ryan Conwell",
+      "pos": "",
+      "height": "6'4\"",
+      "espnId": "110941"
+    },
+    {
+      "pick": 38,
+      "round": 2,
+      "roundPick": 8,
+      "name": "Braden Smith",
+      "pos": "",
+      "height": "6'0\"",
+      "espnId": "110936"
+    },
+    {
+      "pick": 39,
+      "round": 2,
+      "roundPick": 9,
+      "name": "Jack Kayil",
+      "pos": "",
+      "height": "6'5\"",
+      "espnId": "111760"
+    },
+    {
+      "pick": 40,
+      "round": 2,
+      "roundPick": 10,
+      "name": "Dillon Mitchell",
+      "pos": "",
+      "height": "6'8\"",
+      "espnId": "110974"
+    },
+    {
+      "pick": 41,
+      "round": 2,
+      "roundPick": 11,
+      "name": "Otega Oweh",
+      "pos": "",
+      "height": "6'4\"",
+      "espnId": "110995"
+    },
+    {
+      "pick": 42,
+      "round": 2,
+      "roundPick": 12,
+      "name": "Ja'Kobi Gillespie",
+      "pos": "",
+      "height": "6'1\"",
+      "espnId": "111000"
+    },
+    {
+      "pick": 43,
+      "round": 2,
+      "roundPick": 13,
+      "name": "Tyler Bilodeau",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "110992"
+    },
+    {
+      "pick": 44,
+      "round": 2,
+      "roundPick": 14,
+      "name": "Maliq Brown",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "111537"
+    },
+    {
+      "pick": 45,
+      "round": 2,
+      "roundPick": 15,
+      "name": "Emanuel Sharp",
+      "pos": "",
+      "height": "6'3\"",
+      "espnId": "110985"
+    },
+    {
+      "pick": 46,
+      "round": 2,
+      "roundPick": 16,
+      "name": "Felix Okpara",
+      "pos": "",
+      "height": "6'11\"",
+      "espnId": "111001"
+    },
+    {
+      "pick": 47,
+      "round": 2,
+      "roundPick": 17,
+      "name": "Tyler Nickel",
+      "pos": "",
+      "height": "6'7\"",
+      "espnId": "110990"
+    },
+    {
+      "pick": 48,
+      "round": 2,
+      "roundPick": 18,
+      "name": "Tobi Lawal",
+      "pos": "",
+      "height": "6'8\"",
+      "espnId": "111765"
+    },
+    {
+      "pick": 49,
+      "round": 2,
+      "roundPick": 19,
+      "name": "Bryce Hopkins",
+      "pos": "",
+      "height": "6'7\"",
+      "espnId": "111770"
+    },
+    {
+      "pick": 50,
+      "round": 2,
+      "roundPick": 20,
+      "name": "Jaden Bradley",
+      "pos": "",
+      "height": "6'3\"",
+      "espnId": "110957"
+    },
+    {
+      "pick": 51,
+      "round": 2,
+      "roundPick": 21,
+      "name": "Izaiyah Nelson",
+      "pos": "",
+      "height": "6'10\"",
+      "espnId": "111762"
+    },
+    {
+      "pick": 52,
+      "round": 2,
+      "roundPick": 22,
+      "name": "Henri Veesaar",
+      "pos": "",
+      "height": "7'0\"",
+      "espnId": "110935"
+    },
+    {
+      "pick": 53,
+      "round": 2,
+      "roundPick": 23,
+      "name": "Ugonna Onyenso",
+      "pos": "",
+      "height": "7'0\"",
+      "espnId": "111536"
+    },
+    {
+      "pick": 54,
+      "round": 2,
+      "roundPick": 24,
+      "name": "Lajae Jones",
+      "pos": "",
+      "height": "6'7\"",
+      "espnId": "111776"
+    },
+    {
+      "pick": 55,
+      "round": 2,
+      "roundPick": 25,
+      "name": "Nick Martinelli",
+      "pos": "",
+      "height": "6'7\"",
+      "espnId": "110986"
+    },
+    {
+      "pick": 56,
+      "round": 2,
+      "roundPick": 26,
+      "name": "Vsevolod Ishchenko",
+      "pos": "",
+      "height": "6'3\"",
+      "espnId": "4582726"
+    },
+    {
+      "pick": 57,
+      "round": 2,
+      "roundPick": 27,
+      "name": "Narcisse Ngoy",
+      "pos": "",
+      "height": "7'1\"",
+      "espnId": "4582817"
+    },
+    {
+      "pick": 58,
+      "round": 2,
+      "roundPick": 28,
+      "name": "Jaron Pierre Jr.",
+      "pos": "",
+      "height": "6'5\"",
+      "espnId": "110998"
+    },
+    {
+      "pick": 59,
+      "round": 2,
+      "roundPick": 29,
+      "name": "Trey Kaufman-Renn",
+      "pos": "",
+      "height": "6'9\"",
+      "espnId": "110988"
+    },
+    {
+      "pick": 60,
+      "round": 2,
+      "roundPick": 30,
+      "name": "Malique Lewis",
+      "pos": "",
+      "height": "6'8\"",
+      "espnId": "4582727"
+    }
+  ]
+}

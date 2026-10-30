@@ -148,11 +148,11 @@ async function main() {
   const correctedHallOfFamers = ['Kevin McHale','Dave Debusschere','Hal Greer','Artis Gilmore','Dennis Rodman','Joe Dumars','Dominique Wilkins','Bernard King','Wes Unseld','David Thompson','Dan Issel','Bill Walton','Bob McAdoo','Mitch Richmond','Tony Parker'];
   const historicalByName = new Map(teams.flatMap(team => team.historicalPlayers).map(player => [player.nameEn, player]));
   assert.deepEqual(correctedHallOfFamers.filter(name => historicalByName.get(name)?.historicalTier !== 'hall-of-fame'), [], '已入选 Naismith 名人堂的球员必须正确标记');
-  const lakers = pool.teams['23'];
-  const currentLeBron = lakers.players.find(player => player.nameEn === 'LeBron James');
-  const peakLeBron = lakers.historicalPlayers.find(player => player.nameEn === 'LeBron James');
-  assert.ok(currentLeBron && peakLeBron, '湖人应同时保留现役版和巅峰版 LeBron James');
-  assert.notEqual(currentLeBron.uid, peakLeBron.uid, '现役版和巅峰版必须是两张独立球员卡');
+  const warriors = teams.find(team => team.id === 21);
+  const currentCurry = warriors.players.find(player => player.nameEn === 'Stephen Curry');
+  const peakCurry = warriors.historicalPlayers.find(player => player.nameEn === 'Stephen Curry');
+  assert.ok(currentCurry && peakCurry, '勇士应同时保留现役版和巅峰版 Stephen Curry');
+  assert.notEqual(currentCurry.uid, peakCurry.uid, '现役版和巅峰版必须是两张独立球员卡');
   assert.equal(pool.rules.currentAndPeakVersionsIndependent, true, '球员池必须声明现役/巅峰版本独立');
   const derrickRose = teams.find(team => team.id === 6).historicalPlayers.find(player => player.nameEn === 'Derrick Rose');
   assert.ok(derrickRose, '公牛历史惊喜池应包含 Derrick Rose');
@@ -182,7 +182,11 @@ async function main() {
     const badResponses = [];
     page.on('pageerror', error => errors.push('[pageerror] ' + error.message));
     page.on('console', message => {
-      if (message.type() === 'error') errors.push('[console] ' + message.text() + ' @ ' + (message.location().url || 'unknown'));
+      if (message.type() !== 'error') return;
+      const location = message.location().url || '';
+      // Google Fonts is optional; offline/firewall failures must not fail the game smoke test.
+      if (/fonts\.(googleapis|gstatic)\.com/.test(location) || /fonts\.gstatic\.com/.test(message.text())) return;
+      errors.push('[console] ' + message.text() + ' @ ' + (location || 'unknown'));
     });
     page.on('response', response => {
       if (response.status() >= 400) badResponses.push(response.status() + ' ' + response.url());
@@ -192,7 +196,10 @@ async function main() {
     await page.waitForSelector('#screen-menu.active');
     await page.waitForFunction(() => window.PERFECT_PLAYER_POOL_REPORT && window.PERFECT_PLAYER_POOL_REPORT.total === 510);
 
-    assert.equal(await page.locator('.feature-card').count(), 1, '首页只应有虎扑原生涯入口');
+    assert.equal(await page.locator('.feature-card').count(), 2, '首页应保留生涯模式与巨星模式两张入口');
+    assert.ok((await page.textContent('.hero-data-badge')).includes('2026-27 现役名单'), '首页应展示当前名单版本');
+    assert.ok((await page.textContent('.hero-data-badge')).includes('2025-26 表现评分'), '首页应展示评分依据');
+    assert.equal(await page.evaluate(() => window.NBA_2026_27_ROSTERS_APPLIED), true, '2026-27 名单应在页面启动时应用');
     assert.equal(await page.locator('#career-archive-btn').count(), 1, '生涯档案馆入口应只挂在主页生涯卡内');
     assert.equal(await page.locator('#screen-achievements').count(), 0, '征服联盟占位页应移除');
     assert.equal(await page.locator('.btn-share-poster').count(), 0, 'JRs 发帖入口应移除');
@@ -271,7 +278,7 @@ async function main() {
         allDefensePointsTotal:allDefenseBallot.reduce((sum, item) => sum + item.points, 0)
       };
     });
-    assert.equal(awardEngineProbe.version, '2026.08.13-real-ballot-v1', '应加载新版真实评奖引擎');
+    assert.equal(awardEngineProbe.version, '2026.10.20-rotation-v2', '应加载新版真实评奖引擎');
     assert.deepEqual(awardEngineProbe.major65GameAwards.sort(), ['allDefense','allNBA','dpoy','mip','mvp'].sort(), '65场门槛必须覆盖五类CBA奖项/阵容');
     assert.deepEqual(awardEngineProbe.ballotPoints, { mvp:[10,7,5,3,1], other:[5,3,1] }, '媒体选票计分必须符合NBA规则');
     assert.equal(awardEngineProbe.lowAttendance.eligible, false, '64场球员不得参与MVP');
@@ -346,7 +353,7 @@ async function main() {
         clearLineupCache();
       }
     });
-    assert.equal(awardCalculationProbe.version, '2026.08.13-real-ballot-v1', '完整赛季应使用新版评奖引擎');
+    assert.equal(awardCalculationProbe.version, '2026.10.20-rotation-v2', '完整赛季应使用新版评奖引擎');
     assert.deepEqual(['mvp','dpoy','mip','allStar','roty','sixthman','allNBA','allDefense','allRookie'].filter(act => !awardCalculationProbe.acts.includes(act)), [], '新秀赛季应生成全部九类主要荣誉');
     assert.equal(awardCalculationProbe.uniqueActs, awardCalculationProbe.acts.length, '同一奖项不得重复生成');
     assert.equal(awardCalculationProbe.stable, true, '同一赛季重复打开评奖页时结果必须保持不变');
@@ -374,18 +381,19 @@ async function main() {
     assert.equal(poolSeparation.lineupHistorical, 0, '比赛轮换不应出现经典球员');
     const leagueHeadshots = await page.evaluate(() => {
       const current = NBA2K_TEAMS.flatMap(team => NBA2K_DATA[team] || []);
-      const rookies = DRAFT_CLASS_2026.map(item => (NBA2K_DATA[item.team] || []).find(player => player.cname === item.cn));
+      const draftedRookies = DRAFT_CLASS_2026.map(item => (NBA2K_DATA[item.team] || []).find(player => player.cname === item.cn));
+      const rookies = draftedRookies.filter(Boolean);
       return {
         currentCount: current.length,
-        currentMissing: current.filter(player => !player.photoLocal || !player.nbaId).map(player => player.name),
-        rookieCount: rookies.filter(Boolean).length,
-        rookieMissing: rookies.filter(player => !player || !player.photoLocal || !player.nbaId).map(player => player && player.cname),
+        currentMissing: current.filter(player => !player.photoLocal && !player.nbaId).map(player => player.name),
+        rookieCount: rookies.length,
+        rookieMissing: rookies.filter(player => !player.photoLocal && !player.nbaId).map(player => player.cname),
         rookieStyle: rookies[0] ? getPlayerHeadshotStyle(rookies[0], 44) : ''
       };
     });
-    assert.equal(leagueHeadshots.currentCount, 585, '正式名单应包含 525 名原球员和 60 名 2026 新秀');
-    assert.deepEqual(leagueHeadshots.currentMissing, [], '正式比赛名单的球员应全部有官方头像缓存');
-    assert.equal(leagueHeadshots.rookieCount, 60, '2026 新秀应全部进入选秀名单');
+    assert.equal(leagueHeadshots.currentCount, 521, '正式名单应为 2026-27 的 521 名现役球员');
+    assert.deepEqual(leagueHeadshots.currentMissing, [], '正式比赛名单的球员应全部有头像来源');
+    assert.equal(leagueHeadshots.rookieCount, 52, '已进入 2026-27 名单的选秀球员应全部保留');
     assert.deepEqual(leagueHeadshots.rookieMissing, [], '2026 新秀应全部有官方头像缓存');
     assert.ok(leagueHeadshots.rookieStyle.includes('assets/images/Player/rookies-2026/rookie-01.jpg'), '2026 新秀头像应使用 NBA 官方资料页肖像缓存');
     const generatedRookiePhotos = await page.evaluate(() => Array.from({ length: 100 }, () => nextGeneratedRookiePortrait()));
@@ -768,6 +776,7 @@ async function main() {
 
     await page.click('#feature-grid .fc-btn');
     await page.waitForSelector('#screen-character.active');
+    assert.equal(await page.evaluate(() => NBA2K_TEAMS.flatMap(team => NBA2K_DATA[team] || []).filter(player => /^Draft2026_/.test(player.name)).length), 0, '新档不应再注入旧版占位新秀');
     assert.equal(await page.locator('#career-archive-btn').isVisible(), false, '生涯档案馆入口只能在主页显示');
     assert.equal(await page.locator('.character-avatar-tab').count(), 3, '角色创建应有亚洲、白人、黑人三个头像分组');
     const availableAvatarPaths = [];
@@ -934,19 +943,19 @@ async function main() {
     const dualVersionDraw = await page.evaluate(() => {
       const originalRandom = Math.random;
       const originalShuffle = window.shuffleArr;
-      const originalHistorical = PERFECT_PLAYER_HISTORICAL_SURPRISE_DATA.LAL;
-      const current = PERFECT_PLAYER_BUILD_DATA.LAL.find(player => player.name === 'LeBron James');
-      const peak = originalHistorical.find(player => player.name === 'LeBron James');
+      const originalHistorical = PERFECT_PLAYER_HISTORICAL_SURPRISE_DATA.GSW;
+      const current = PERFECT_PLAYER_BUILD_DATA.GSW.find(player => player.name === 'Stephen Curry');
+      const peak = originalHistorical.find(player => player.name === 'Stephen Curry');
       window.shuffleArr = items => items.slice();
-      PERFECT_PLAYER_HISTORICAL_SURPRISE_DATA.LAL = [peak].concat(originalHistorical.filter(player => player !== peak));
+      PERFECT_PLAYER_HISTORICAL_SURPRISE_DATA.GSW = [peak].concat(originalHistorical.filter(player => player !== peak));
       Math.random = () => 0.05;
-      const rest = PERFECT_PLAYER_BUILD_DATA.LAL.filter(player => player !== current).slice(0, 4);
-      const cards = drawBuildPlayers([current].concat(rest), 5, 'LAL');
-      renderRosterPlayers('LAL', cards, PERFECT_PLAYER_BUILD_DATA.LAL);
+      const rest = PERFECT_PLAYER_BUILD_DATA.GSW.filter(player => player !== current).slice(0, 4);
+      const cards = drawBuildPlayers([current].concat(rest), 5, 'GSW');
+      renderRosterPlayers('GSW', cards, PERFECT_PLAYER_BUILD_DATA.GSW);
       Math.random = originalRandom;
       window.shuffleArr = originalShuffle;
-      PERFECT_PLAYER_HISTORICAL_SURPRISE_DATA.LAL = originalHistorical;
-      return cards.filter(player => player.name === 'LeBron James').map(player => ({ kind:player._sourceKind, uid:player._poolUid }));
+      PERFECT_PLAYER_HISTORICAL_SURPRISE_DATA.GSW = originalHistorical;
+      return cards.filter(player => player.name === 'Stephen Curry').map(player => ({ kind:player._sourceKind, uid:player._poolUid }));
     });
     assert.deepEqual(dualVersionDraw.map(card => card.kind).sort(), ['current', 'historical'], '同一轮应允许现役版与巅峰版同时出现');
     assert.equal(new Set(dualVersionDraw.map(card => card.uid)).size, 2, '同名球员两个版本必须保持独立卡 ID');

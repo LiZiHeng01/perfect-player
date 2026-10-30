@@ -141,7 +141,7 @@
     { year: 1984, label: '1983-84', sub: '黑白双雄' }
   ];
   const SINGLE_SEASON = { year: 2025, label: '虎扑单赛季 · 2025-26' };
-  const ATTRIBUTE_POOL_URL = 'assets/data/perfect-player-pool.json?v=20260809-static-peak-table';
+  const ATTRIBUTE_POOL_URL = 'assets/data/perfect-player-pool.json?v=20261030-2026-27-build-pool';
 
   // 18 张透明真人风格主角头像：亚洲、白人、黑人各 6 张。
   const AI_AVATAR_META = Array.from({ length: 18 }, (_, index) => ({

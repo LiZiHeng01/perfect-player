@@ -29,11 +29,14 @@ function loadUpdatedRoster() {
 const updated = loadUpdatedRoster();
 const rosterPlayers = Object.values(updated.data).flat();
 assert.equal(Object.keys(updated.data).length, 30, 'ratings must preserve all 30 teams');
-assert.equal(rosterPlayers.length, 525, 'ratings must cover all 525 current roster entries');
-assert.equal(updated.meta.seasonMatches, 517, '2025-26 season matching coverage changed unexpectedly');
-assert.equal(updated.meta.noSeasonGames, 8, 'full-season no-game fallback count changed unexpectedly');
-assert.equal(rosterPlayers.filter(player => player.ratingSeason === '2025-26').length, 525, 'every current player must be season-tagged');
-assert.equal(rosterPlayers.filter(player => player.ratingBasis === 'no-2025-26-games').length, 8, 'no-game players must use explicit fallback');
+assert.equal(rosterPlayers.length, 521, 'ratings must cover all 521 current roster entries');
+assert.equal(updated.meta.seasonMatches, 441, '2025-26 season matching coverage changed unexpectedly');
+assert.equal(updated.meta.noSeasonGames, 28, 'no-game fallback count changed unexpectedly');
+assert.equal(rosterPlayers.filter(player => player.ratingSeason === '2026-27').length, 521, 'every current player must be season-tagged');
+assert.equal(rosterPlayers.filter(player => player.ratingBasis === 'no-2025-26-games').length, 28, 'no-game players must use explicit fallback');
+assert.equal(updated.meta.season, '2026-27', 'ratings must target the 2026-27 season');
+assert.ok(rosterPlayers.some(player => player.name === 'AJ Dybantsa'), '2026 draft class must be part of the roster');
+assert.ok(!rosterPlayers.some(player => /^Draft2026_/.test(player.name)), 'legacy placeholder rookies must not remain');
 for (const player of rosterPlayers) {
   assert.ok(player.ovr >= 65 && player.ovr <= 99, player.name + ' OVR out of range');
   for (const attr of ATTRS) assert.ok(player[attr] >= 25 && player[attr] <= 99, player.name + ' ' + attr + ' out of range');
@@ -203,7 +206,7 @@ const strongWinRate = strongWins / strengthGames;
 assert.ok(strongWinRate > 0.84 && strongWinRate < 0.97, 'large team-strength gap must create a clear but beatable favorite: ' + strongWinRate);
 
 console.log(JSON.stringify({
-  ratings:{ teams:30, players:525, seasonMatches:517, noSeasonGames:8, top:topRatings },
+  ratings:{ teams:30, players:521, seasonMatches:441, noSeasonGames:28, top:topRatings },
   attributes:{ shooterHigh:shooterHighAvg, shooterLow:shooterLowAvg, creatorHigh:creatorHighAvg, creatorLow:creatorLowAvg, reboundHigh:reboundHighAvg, reboundLow:reboundLowAvg, rimHigh:rimHighAvg, rimLow:rimLowAvg },
   league:{ avgPoints:Number(avgPoints.toFixed(2)), avgPace:Number(avgPace.toFixed(2)), strongWinRate:Number(strongWinRate.toFixed(3)) },
 }, null, 2));
