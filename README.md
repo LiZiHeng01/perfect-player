@@ -3,8 +3,9 @@
 一个纯网页的篮球生涯模拟游戏：创建自己的球员，从现役球员与名人堂/近代全明星惊喜卡身上获取能力，完成一个虎扑风格的 NBA 单赛季。
 
 在线体验：
+- <https://liziheng01.github.io/perfect-player/>（当前版本）
 - <https://zyz9408.github.io/perfect-player/>（原版）
-- <https://lyhshushu.github.io/baske/>（我的）
+- <https://lyhshushu.github.io/baske/>（旧版）
 
 ## 本地运行
 
